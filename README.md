@@ -15,7 +15,7 @@ To start your Phoenix server:
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-## API Reference
+## Public API Reference
 
 #### Login
 
@@ -28,6 +28,14 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 | `username` | `string` | **Required** |
 | `password` | `string` | **Required** |
 
+##### Body Raw
+```javascript
+{
+  "username": "your username",
+  "password": "your password"
+}
+```
+
 #### Register
 
 ```http
@@ -39,6 +47,22 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 | `email`      | `string` | **Required** |
 | `username`| `string` | **Required** |
 | `password` | `string` | **Required** |
+
+##### Body Raw
+```javascript
+{
+  "email" : "your email",
+  "username": "your username",
+  "password": "your password"
+}
+```
+
+## Auth API Reference
+
+#### Headers
+```javascript
+{"Authorization" : "Bearer token"}
+```
 
 #### Blog (List)
 
@@ -61,7 +85,7 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 | `title`   | `string` | **Required** |
 | `body`    | `string` | **Required** |
 
-##### Body Example
+##### Body Raw
 ```javascript
 {
   "post": {
@@ -80,7 +104,7 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 | `title`   | `string` | **Optional** |
 | `body`    | `string` | **Optional** |
 
-##### Body Example
+##### Body Raw
 ```javascript
 {
   "post": {

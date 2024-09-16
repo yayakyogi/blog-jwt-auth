@@ -33,10 +33,14 @@ defmodule HelloWeb.PostController do
   end
 
   def update(conn, %{"id" => id, "post" => post_params}) do
-    post = Posts.get_post!(id)
+    try do
+      post = Posts.get_post!(id)
 
-    with{:ok, %Post{} = post} <- Posts.update_post(post, post_params) do
-      render(conn, :show, post: post)
+      with{:ok, %Post{} = post} <- Posts.update_post(post, post_params) do
+        render(conn, :show, post: post)
+      end
+    rescue
+      Ecto.NoResultsError -> {:error, :not_found}
     end
   end
 

@@ -97,12 +97,12 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 #### Blog (update)
 ```http
-  PATCH /api/v1/blog/1
+  PUT /api/v1/blog/1
 ```
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
-| `title`   | `string` | **Optional** |
-| `body`    | `string` | **Optional** |
+| `title`   | `string` | **Required** |
+| `body`    | `string` | **Required** |
 
 ##### Body Raw
 ```javascript

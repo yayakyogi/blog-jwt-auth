@@ -23,7 +23,6 @@ defmodule HelloWeb.FallbackController do
 
   def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
     errors = format_errors(changeset.errors)
-    IO.inspect(errors, label: "Errors")
 
     conn
     |> put_status(:unprocessable_entity)

@@ -7,6 +7,7 @@ defmodule Hello.Posts do
   alias Hello.Repo
 
   alias Hello.Posts.Post
+  alias Hello.Accounts.User
 
   @doc """
   Returns the list of posts.
@@ -36,7 +37,14 @@ defmodule Hello.Posts do
 
   """
   def get_post!(id), do: Repo.get!(Post, id)
-
+  def get_post(id) do
+    from(
+      p in Post,
+      where: p.id == ^id,
+      preload: [:user],
+    )
+    |> Repo.one()
+  end
   @doc """
   Creates a post.
 

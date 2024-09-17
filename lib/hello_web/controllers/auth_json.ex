@@ -1,5 +1,6 @@
 defmodule HelloWeb.AuthJSON do
   alias Hello.Accounts.User
+  alias HelloWeb.PostJSON
 
   @doc """
     Check API
@@ -27,6 +28,16 @@ defmodule HelloWeb.AuthJSON do
       id: user.id,
       username: user.username,
       email: user.email,
+      posts: Enum.map(
+                user.posts,
+                fn post -> %{
+                  id: post.id,
+                  title: post.title,
+                  body: post.body,
+                  inserted_at: post.inserted_at
+                }
+                end
+             )
     }
   end
 end

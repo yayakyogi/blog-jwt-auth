@@ -1,5 +1,6 @@
 defmodule HelloWeb.PostJSON do
   alias Hello.Posts.Post
+  alias Hello.Accounts.User
 
   @doc """
   Renders a list of post.
@@ -20,7 +21,11 @@ defmodule HelloWeb.PostJSON do
       id: post.id,
       body: post.body,
       title: post.title,
-      user_id: post.user_id,
+      user: %{
+        email: post.user.email,
+        username: post.user.username
+      },
+      inserted_at: post.inserted_at
     }
   end
 end

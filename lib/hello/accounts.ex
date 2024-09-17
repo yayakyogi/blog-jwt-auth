@@ -43,6 +43,7 @@ defmodule Hello.Accounts do
     select: [:id, :inserted_at, :updated_at, :email, :username]
     )
     |> Repo.one()
+    |> Repo.preload(:posts)
   end
 
   def get_user_by_username(username) do

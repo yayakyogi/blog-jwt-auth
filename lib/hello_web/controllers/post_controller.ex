@@ -25,7 +25,7 @@ defmodule HelloWeb.PostController do
 
   def show(conn, %{"id" => id}) do
     try do
-      post = Posts.get_post!(id)
+      post = Posts.get_post(id)
       render(conn, :show, post: post)
     rescue
       Ecto.NoResultsError -> {:error, :not_found}

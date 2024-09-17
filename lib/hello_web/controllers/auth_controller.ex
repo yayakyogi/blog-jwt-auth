@@ -41,6 +41,7 @@ defmodule HelloWeb.AuthController do
   end
 
   def get(conn, _params) do
+    IO.inspect(conn.assigns.current_user)
     render(conn, :show, %{success: true, user: conn.assigns.current_user})
   end
 

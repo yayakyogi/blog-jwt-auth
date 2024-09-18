@@ -1,5 +1,6 @@
 defmodule HelloWeb.JWTAuthPlug do
   import Plug.Conn
+  import Phoenix.Controller, only: [json: 2]
   alias Hello.Accounts
   alias Hello.Accounts.User
   alias Hello.AuthTokens
@@ -10,7 +11,10 @@ defmodule HelloWeb.JWTAuthPlug do
     bearer = get_req_header(conn, "authorization") |> List.first()
 
     if bearer == nil do
-      conn |> put_status(401) |> halt
+      conn
+      |> put_status(401)
+      |> json(%{success: false, message: "Unauthorized"})
+      |> halt
     else
       token = bearer |> String.split(" ") |> List.last()
       secret = "z2YhWroSFlX29UhOBiRxfr1LOtKjIQ1EOYIZFDz0+1U38oDdZGZdnxZ9HW4sE77w"
@@ -21,13 +25,24 @@ defmodule HelloWeb.JWTAuthPlug do
         %User{} = user <- Accounts.get_user(user_id) do
 
         if AuthTokens.get_auth_token_by_token(token) != nil do
-          conn |> put_status(401) |> halt
+          conn
+          |> put_status(401)
+          |> json(%{success: false, message: "Unauthorized"})
+          |> halt()
         else
           conn |> assign(:current_user, user)
         end
       else
-        {:error, _reason} -> conn |> put_status(401) |> halt
-        _ -> conn |> put_status(401) |> halt
+        {:error, _reason} ->
+          conn
+          |> put_status(401)
+          |> json(%{success: false, message: "Unauthorized"})
+          |> halt()
+        _ ->
+          conn
+          |> put_status(401)
+          |> json(%{success: false, message: "Unauthorized"})
+          |> halt()
       end
     end
   end

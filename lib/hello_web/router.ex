@@ -24,6 +24,8 @@ defmodule HelloWeb.Router do
 
     post "/register", AuthController, :register
     post "/login", AuthController, :login
+    get "/blog", PostController, :index
+    get "/blog/:id", PostController, :show
   end
 
   scope "/api/v1", HelloWeb do
@@ -32,7 +34,12 @@ defmodule HelloWeb.Router do
     get "/", AuthController, :get
     delete "/", AuthController, :logout
     get "/ping", AuthController, :ping
-    resources "/blog", PostController, except: [:new, :edit]
+
+    scope "/blog" do
+      post "/", PostController, :create
+      put "/:id", PostController, :update
+      delete "/:id", PostController, :delete
+    end
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

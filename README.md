@@ -57,23 +57,23 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 }
 ```
 
-## Auth API Reference
-
-#### Headers
-```javascript
-{"Authorization" : "Bearer token"}
-```
-
 #### Blog (List)
 
 ```http
-  GET /api/v1/blog
+  GET /blog
 ```
 
 #### Blog (Detail)
 
 ```http
-  GET /api/v1/blog/1
+  GET /blog/1
+```
+
+## Auth API Reference
+
+#### Headers
+```javascript
+{"Authorization" : "Bearer token"}
 ```
 
 #### Blog (create)
